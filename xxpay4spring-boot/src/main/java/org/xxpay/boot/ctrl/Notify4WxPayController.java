@@ -1,5 +1,6 @@
 package org.xxpay.boot.ctrl;
 
+import io.swagger.annotations.Api;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ import java.io.IOException;
  * @Copyright: www.xxpay.org
  */
 @RestController
+
+@Api(value = "支付订单查询", description = "支付订单查询")
 public class Notify4WxPayController {
 
 	private static final MyLog _log = MyLog.getLog(Notify4WxPayController.class);

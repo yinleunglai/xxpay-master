@@ -1,5 +1,6 @@
 package org.xxpay.boot.ctrl;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,8 @@ import java.util.Map;
  * @Copyright: www.xxpay.org
  */
 @RestController
+
+@Api(value = "支付订单查询", description = "支付订单查询")
 public class Notify4AliPayController {
 
 	private static final MyLog _log = MyLog.getLog(Notify4AliPayController.class);

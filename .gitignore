@@ -3,3 +3,7 @@
 /log/
 target/
 *.project
+xxpay4spring-boot/.idea/
+xxpay4spring-boot/log/
+xxpay-mgr/log/
+xxpay-shop/log/

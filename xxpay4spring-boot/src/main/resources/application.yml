@@ -5,9 +5,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/xxpaydb?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false
-    username: xxpay
-    password: xxpay
+    url: jdbc:mysql://127.0.0.1:3306/xxpay?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: Yan@moling048356
     initialSize: 5    # 初始化大小
     minIdle: 5        # 最小
     maxActive: 20     # 最大
@@ -25,8 +25,8 @@ spring:
   profiles:
      active: prod
      include:
-       - activeMQ
-       #- rabbitMQ # 需要安装延迟队列插件：https://www.rabbitmq.com/blog/2015/04/16/scheduling-messages-with-rabbitmq/
+       #- activeMQ
+       rabbitMQ # 需要安装延迟队列插件：https://www.rabbitmq.com/blog/2015/04/16/scheduling-messages-with-rabbitmq/
 
   activemq:
     broker-url: failover:(tcp://127.0.0.1:61616?wireFormat.maxInactivityDuration=0)

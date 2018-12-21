@@ -1,6 +1,7 @@
 package org.xxpay.boot.ctrl;
 
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,6 +25,7 @@ import java.util.Map;
  * @Copyright: www.xxpay.org
  */
 @RestController
+@Api(value = "支付订单查询", description = "支付订单查询")
 public class QueryPayOrderController {
 
     private final MyLog _log = MyLog.getLog(QueryPayOrderController.class);
