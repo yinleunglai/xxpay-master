@@ -2,15 +2,13 @@ package org.xxpay.shop.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.xxpay.common.constant.PayConstant;
 import org.xxpay.common.util.*;
 import org.xxpay.shop.dao.model.GoodsOrder;
@@ -30,6 +28,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
 @RequestMapping("/goods")
+@Api(value = "商店", description = "商店")
 public class GoodsOrderController {
 
     private final static MyLog _log = MyLog.getLog(GoodsOrderController.class);
@@ -54,7 +53,7 @@ public class GoodsOrderController {
     private final static String GetOpenIdURL2 = "http://shop.xxpay.org/goods/getOpenId2";
 
 
-    @RequestMapping(value = "/buy/{goodsId}", method = RequestMethod.GET)
+    @GetMapping(value = "/buy/{goodsId}")
     @ResponseBody
     public String buy(@PathVariable("goodsId") String goodsId) {
         if(!"G_0001".equals(goodsId)) {
@@ -73,7 +72,7 @@ public class GoodsOrderController {
         return result+"";
     }
 
-    @RequestMapping(value = "/pay/{goodsOrderId}", method = RequestMethod.GET)
+    @GetMapping(value = "/pay/{goodsOrderId}")
     @ResponseBody
     public String pay(@PathVariable("goodsOrderId") String goodsOrderId) {
         GoodsOrder goodsOrder = goodsOrderService.getGoodsOrder(goodsOrderId);
@@ -168,16 +167,18 @@ public class GoodsOrderController {
         return retMap;
     }
 
-    @RequestMapping("/openQrPay.html")
+    @GetMapping("/openQrPay.html")
     public String openQrPay(ModelMap model) {
         return "openQrPay";
     }
 
-    @RequestMapping("/qrPay.html")
+    @GetMapping("/qrPay.html")
     public String qrPay(ModelMap model, HttpServletRequest request, Long amount) {
         String logPrefix = "【二维码扫码支付】";
         String view = "qrPay";
         _log.info("====== 开始接收二维码扫码支付请求 ======");
+        System.out.println("====== 开始接收二维码扫码支付请求 ======");
+        _log.info("====== Begin to receive the QRCODE PAYMENT request======");
         String ua = request.getHeader("User-Agent");
         String goodsId = "G_0001";
         _log.info("{}接收参数:goodsId={},amount={},ua={}", logPrefix, goodsId, amount, ua);
@@ -269,7 +270,7 @@ public class GoodsOrderController {
      * 获取code
      * @return
      */
-    @RequestMapping("/getOpenId")
+    @GetMapping("/getOpenId")
     public void getOpenId(HttpServletRequest request, HttpServletResponse response) throws IOException {
         _log.info("进入获取用户openID页面");
         String redirectUrl = request.getParameter("redirectUrl");
@@ -301,7 +302,7 @@ public class GoodsOrderController {
      * 获取code
      * @return
      */
-    @RequestMapping("/getOpenId2")
+    @GetMapping("/getOpenId2")
     public void getOpenId2(HttpServletRequest request, HttpServletResponse response) throws IOException {
         _log.info("进入获取用户openID页面");
         String redirectUrl = request.getParameter("redirectUrl");
@@ -335,7 +336,7 @@ public class GoodsOrderController {
      * @param response
      * @throws Exception
      */
-    @RequestMapping("/payNotify")
+    @GetMapping("/payNotify")
     public void payNotify(HttpServletRequest request, HttpServletResponse response) throws Exception {
         _log.info("====== 开始处理支付中心通知 ======");
         Map<String,Object> paramMap = request2payResponseMap(request, new String[]{
@@ -383,12 +384,12 @@ public class GoodsOrderController {
         _log.info("====== 支付中心通知处理完成 ======");
     }
 
-    @RequestMapping("/notify_test")
+    @GetMapping("/notify_test")
     public void notifyTest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         outResult(response, "success");
     }
 
-    @RequestMapping("/toAliPay.html")
+    @GetMapping("/toAliPay.html")
     @ResponseBody
     public String toAliPay(HttpServletRequest request, Long amount, String channelId) {
         String logPrefix = "【支付宝支付】";

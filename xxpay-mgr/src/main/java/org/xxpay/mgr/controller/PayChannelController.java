@@ -3,6 +3,7 @@ package org.xxpay.mgr.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/pay_channel")
+@Api(value = "后台管理", description = "后台管理")
 public class PayChannelController {
 
     private final static MyLog _log = MyLog.getLog(PayChannelController.class);
@@ -28,12 +30,12 @@ public class PayChannelController {
     @Autowired
     private PayChannelService payChannelService;
 
-    @RequestMapping("/list.html")
+    @GetMapping("/list.html")
     public String listInput(ModelMap model) {
         return "pay_channel/list";
     }
 
-    @RequestMapping("/edit.html")
+    @GetMapping("/edit.html")
     public String editInput(String id, ModelMap model) {
         PayChannel item = null;
         if(StringUtils.isNotBlank(id) && NumberUtils.isNumber(id)) {
@@ -44,7 +46,7 @@ public class PayChannelController {
         return "pay_channel/edit";
     }
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public String list(@ModelAttribute PayChannel payChannel, Integer pageIndex, Integer pageSize) {
         PageModel pageModel = new PageModel();
@@ -66,7 +68,7 @@ public class PayChannelController {
         return JSON.toJSONString(pageModel);
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @PostMapping(value = "/save")
     @ResponseBody
     public String save(@RequestParam String params) {
         JSONObject po = JSONObject.parseObject(params);
@@ -111,7 +113,7 @@ public class PayChannelController {
         return result+"";
     }
 
-    @RequestMapping("/view.html")
+    @GetMapping("/view.html")
     public String viewInput(String id, ModelMap model) {
         PayChannel item = null;
         if(StringUtils.isNotBlank(id) && NumberUtils.isNumber(id)) {

@@ -3,6 +3,7 @@ package org.xxpay.mgr.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/mch_info")
+@Api(value = "后台管理", description = "后台管理")
 public class MchInfoController {
 
     private final static MyLog _log = MyLog.getLog(MchInfoController.class);
@@ -27,12 +29,12 @@ public class MchInfoController {
     @Autowired
     private MchInfoService mchInfoService;
 
-    @RequestMapping("/list.html")
+    @GetMapping("/list.html")
     public String listInput(ModelMap model) {
         return "mch_info/list";
     }
 
-    @RequestMapping("/edit.html")
+    @GetMapping("/edit.html")
     public String editInput(String mchId, ModelMap model) {
         MchInfo item = null;
         if(StringUtils.isNotBlank(mchId)) {
@@ -43,7 +45,7 @@ public class MchInfoController {
         return "mch_info/edit";
     }
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public String list(@ModelAttribute MchInfo mchInfo, Integer pageIndex, Integer pageSize) {
         PageModel pageModel = new PageModel();
@@ -65,7 +67,7 @@ public class MchInfoController {
         return JSON.toJSONString(pageModel);
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @PostMapping(value = "/save")
     @ResponseBody
     public String save(@RequestParam String params) {
         JSONObject po = JSONObject.parseObject(params);
@@ -89,7 +91,7 @@ public class MchInfoController {
         return result+"";
     }
 
-    @RequestMapping("/view.html")
+    @GetMapping("/view.html")
     public String viewInput(String mchId, ModelMap model) {
         MchInfo item = null;
         if(StringUtils.isNotBlank(mchId)) {

@@ -46,11 +46,7 @@
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="text-muted">&copy;2017 xxpay <script src="https://s13.cnzz.com/z_stat.php?id=1262480096&web_id=1262480096" language="JavaScript"></script></p>
-    </div>
-</footer>
+
 
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -80,7 +76,7 @@
         }
         $("#vAmt").text(vAmt+'元');
         //var qrText = 'http://xxpay-shop.ngrok.cc/goods/qrPay/' + (vAmt*100);
-        var qrText = 'http://shop.xxpay.org/goods/qrPay.html?amount=' + (vAmt*100);
+        var qrText = 'http://127.0.0.1:8081/goods/qrPay.html?amount=' + (vAmt*100);
         qrcode.makeCode(qrText);
     }
 

@@ -3,11 +3,13 @@ package org.xxpay.mgr.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +23,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/mch_notify")
+@Api(value = "后台管理", description = "后台管理")
 public class MchNotifyController {
 
     private final static MyLog _log = MyLog.getLog(MchNotifyController.class);
@@ -28,12 +31,12 @@ public class MchNotifyController {
     @Autowired
     private MchNotifyService mchNotifyService;
 
-    @RequestMapping("/list.html")
+    @GetMapping("/list.html")
     public String listInput(ModelMap model) {
         return "mch_notify/list";
     }
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public String list(@ModelAttribute MchNotify mchNotify, Integer pageIndex, Integer pageSize) {
         PageModel pageModel = new PageModel();
@@ -56,7 +59,7 @@ public class MchNotifyController {
         return JSON.toJSONString(pageModel);
     }
 
-    @RequestMapping("/view.html")
+    @GetMapping("/view.html")
     public String viewInput(String orderId, ModelMap model) {
         MchNotify item = null;
         if(StringUtils.isNotBlank(orderId)) {
