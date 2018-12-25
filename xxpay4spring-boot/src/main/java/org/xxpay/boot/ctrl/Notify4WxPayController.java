@@ -3,6 +3,7 @@ package org.xxpay.boot.ctrl;
 import io.swagger.annotations.Api;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +38,7 @@ public class Notify4WxPayController {
 	 * @throws ServletException
 	 * @throws IOException
      */
-	@RequestMapping("/notify/pay/wxPayNotifyRes.htm")
+	@GetMapping("/notify/pay/wxPayNotifyRes.htm")
 	@ResponseBody
 	public String wxPayNotifyRes(HttpServletRequest request) throws ServletException, IOException {
 		_log.info("====== 开始接收微信支付回调通知 ======");

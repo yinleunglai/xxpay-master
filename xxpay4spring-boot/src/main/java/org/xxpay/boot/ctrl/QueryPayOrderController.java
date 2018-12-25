@@ -5,10 +5,7 @@ import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.xxpay.boot.service.IMchInfoService;
 import org.xxpay.boot.service.IPayOrderService;
 import org.xxpay.common.constant.PayConstant;
@@ -44,13 +41,13 @@ public class QueryPayOrderController {
      * @param params
      * @return
      */
-    @RequestMapping(value = "/api/pay/query_order")
+    @PostMapping(value = "/api/pay/query_order")
     public String queryPayOrder(@RequestParam String params) {
     	JSONObject po = JSONObject.parseObject(params);
     	return queryPayOrder(po);
     }
     
-    @RequestMapping(value = "/api/pay/query_order", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/api/pay/query_order", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public String queryPayOrder(@RequestBody JSONObject params) {
         _log.info("###### 开始接收商户查询支付订单请求 ######");
         String logPrefix = "【商户支付订单查询】";

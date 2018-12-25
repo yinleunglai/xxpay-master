@@ -2,6 +2,7 @@ package org.xxpay.boot.ctrl;
 
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +41,7 @@ public class Notify4AliPayController {
 	 * @throws ServletException
 	 * @throws IOException
      */
-	@RequestMapping(value = "/notify/pay/aliPayNotifyRes.htm")
+	@GetMapping(value = "/notify/pay/aliPayNotifyRes.htm")
 	@ResponseBody
 	public String aliPayNotifyRes(HttpServletRequest request) throws ServletException, IOException {
 		_log.info("====== 开始接收支付宝支付回调通知 ======");
